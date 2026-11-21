@@ -1,0 +1,12 @@
+name,amount,payment_method,entity_type,payment_category,w9_status,tin_status,federal_withholding
+Riley Chen,2500,check,individual,services,have,have,no
+Jordan Blake,400,check,individual,services,missing,missing,no
+Sam Patel,3200,unknown,individual,services,have,have,no
+Avery Nguyen,500,check,individual,services,have,have,no
+Morgan Ellis,8000,check,C or S corp,services,have,have,no
+Harper Singh,4500,check,attorney/law firm,services,have,have,no
+Quinn Alvarez,3000,check,C or S corp,medical,have,have,no
+Casey Brooks,180,ACH/bank transfer,individual,services,have,have,yes
+Drew Okonkwo,4200,PayPal/payment app,partnership,services,have,have,no
+Parker Quinn,900,check,attorney/law firm,attorney gross proceeds,have,have,no
+Reese Morgan,2600,check,individual,services,missing,missing,no
