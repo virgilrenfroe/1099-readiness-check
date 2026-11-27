@@ -1,116 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <title>1099 Readiness Check has moved</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="referrer" content="no-referrer">
-  <meta name="description" content="A free browser check that sorts a payee list for Forms 1099-NEC and 1099-MISC. Not tax advice. Nothing is uploaded.">
-  <title>1099 Readiness Check</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='2' fill='%23145c45'/%3E%3Cpath d='M3.8 8.2 6.5 11 12.2 4.8' fill='none' stroke='white' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css">
+  <meta http-equiv="refresh" content="0; url=https://shopconvergence.com/1099-check/">
+  <link rel="canonical" href="https://shopconvergence.com/1099-check/">
+  <meta name="robots" content="noindex, follow">
 </head>
 <body>
-  <a class="skip no-print" href="#intake">Skip to the check</a>
-  <header class="site-header no-print">
-    <p class="kicker">In your browser. Nothing is uploaded.</p>
-    <h1>1099 Readiness Check</h1>
-    <p class="lede">I help small-business owners get ready to file 1099s for subcontractors and other payees. I will review your payee list against official IRS rules and give you a printable report and a W-9 request list. I will not file for you, give tax advice, or ask for full Social Security or employer identification numbers. You can tell me whether you have a TIN, or only the last four digits.</p>
-  </header>
-
   <main>
-    <section class="limits no-print" aria-labelledby="limits-heading">
-      <h2 id="limits-heading">Limits</h2>
-      <ul>
-        <li>This is not tax advice or a filing service. This page will not file, pay, or contact the IRS or a state agency for you.</li>
-        <li>On a close call, the result is flagged for a CPA or enrolled agent. It is not a final verdict.</li>
-        <li>Do not enter a full Social Security number, full EIN, bank or card number, PIN, password, or login. For a TIN, choose “have it,” “missing,” or enter only the last four digits.</li>
-        <li>If a full TIN is pasted, it is removed and is not stored.</li>
-        <li>The list stays in this browser. Confirm every dollar figure and deadline on the official page before you rely on it.</li>
-        <li>Report a 1099 only for payments made in your trade or business. Personal payments are not reportable.</li>
-      </ul>
-    </section>
-
-    <form id="intake" class="no-print" autocomplete="off" onsubmit="return false">
-      <fieldset>
-        <legend>1. Tax year</legend>
-        <p id="year-help">Which tax year are we checking? That is the calendar year you made the payments. The dollar threshold is different for 2025 and 2026.</p>
-        <div class="year-row">
-          <div>
-            <label for="tax-year">Tax year</label>
-            <select id="tax-year" name="tax-year" aria-describedby="year-help year-note">
-              <option value="">Choose a year</option>
-              <option value="2025">2025</option>
-              <option value="2026">2026</option>
-              <option value="other">Another year</option>
-            </select>
-          </div>
-          <div id="other-year-wrap" hidden>
-            <label for="tax-year-other">Calendar year</label>
-            <input id="tax-year-other" name="tax-year-other" type="number" inputmode="numeric" min="2000" max="2100" step="1">
-          </div>
-        </div>
-        <p id="year-note" class="note"></p>
-      </fieldset>
-
-      <fieldset>
-        <legend>2. Business</legend>
-        <label for="business-type">What kind of business is this?</label>
-        <input id="business-type" name="business-type" type="text" maxlength="160" placeholder="For example, a home-improvement contractor paying subcontractors">
-        <p class="note">Use this only for payments made in the course of that trade or business.</p>
-      </fieldset>
-
-      <fieldset>
-        <legend>3. North Carolina</legend>
-        <p id="nc-help">Are this business or any payees in North Carolina? This adds the state note. It does not change the federal result.</p>
-        <div class="choice-row" role="radiogroup" aria-describedby="nc-help">
-          <label class="choice"><input type="radio" name="nc" id="nc-yes" value="yes"> Yes</label>
-          <label class="choice"><input type="radio" name="nc" id="nc-no" value="no"> No</label>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>4. Payees</legend>
-        <p>Paste or upload the list of payees and amounts. A CSV file, or cells pasted from a spreadsheet, is fine. If you use Excel, save the sheet as CSV, or paste the cells here. Do not include full Social Security or EIN numbers.</p>
-        <p>How were these amounts paid? Mark credit card, debit card, PayPal, and other payment-app rows. Those are often reported on Form 1099-K by the processor, not by you. Add the entity type if you know it. If you have a W-9, say so without sending the TIN.</p>
-        <div class="csv-tools">
-          <a class="button secondary" href="sample-payees.csv" download="sample-payees.csv">Download a sample CSV</a>
-          <button type="button" class="button secondary" id="load-sample">Load the sample list</button>
-        </div>
-        <label for="csv-file">Upload a CSV</label>
-        <input id="csv-file" type="file" accept=".csv,text/csv,text/plain,.txt,.tsv">
-        <label for="csv-paste">Or paste CSV or spreadsheet cells</label>
-        <textarea id="csv-paste" rows="5" spellcheck="false" placeholder="name,amount,payment_method,entity_type,payment_category,w9_status,tin_status,federal_withholding"></textarea>
-        <button type="button" class="button secondary" id="load-paste">Load the paste into the table</button>
-        <p id="tin-warning" class="warning" hidden></p>
-        <p class="scroll-hint">On a small screen, swipe the table sideways. Each payee is one row.</p>
-        <div id="payee-mount" class="table-scroll"></div>
-        <div class="row-actions">
-          <button type="button" class="button secondary" id="add-row">Add a payee</button>
-        </div>
-        <label class="choice incomplete">
-          <input type="checkbox" id="list-incomplete">
-          This payee list is incomplete
-        </label>
-      </fieldset>
-
-      <div id="form-errors" class="warning" hidden></div>
-      <button type="submit" class="button primary" id="run-check">Run the check</button>
-    </form>
-
-    <section id="results" hidden>
-      <div class="toolbar no-print">
-        <button type="button" class="button primary" id="print-button">Print or save PDF</button>
-        <button type="button" class="button secondary" id="print-view">Show print view</button>
-        <p class="note">The printed report is titled “1099 Readiness Check report.” Its footer is 1099-CHECK. In the print dialog, turn off the browser’s own header and footer if you want that line to stand alone.</p>
-      </div>
-      <article id="report" aria-live="polite"></article>
-    </section>
+    <h1>1099 Readiness Check has moved</h1>
+    <p>The free 1099 Readiness Check is now at <a href="https://shopconvergence.com/1099-check/">https://shopconvergence.com/1099-check/</a>.</p>
   </main>
-
-  <footer class="site-footer no-print">1099-CHECK</footer>
-  <noscript>
-    <p class="warning">This check runs in your browser and needs JavaScript. It still does not upload the list.</p>
-  </noscript>
-  <script type="module" src="app.js"></script>
 </body>
 </html>
